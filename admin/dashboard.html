@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Intro</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+
+  <style>
+    #eventsSection,#add_event
+    {
+      display: none;
+    }
+  </style>
+
+</head>
+
+<body class="index-page" return onload="data()">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 class="sitename">EMS</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+         
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <a class="cta-btn" href="logout.html">Logout</a>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- js files ................................................................. -->
+
+    <script src="authentication.js"></script>
+
+    <script src="EventsModels.js"></script>
+
+   <!-- js files ................................................................. -->
+
+
+
+
+   <!-- Hero Section -->
+<section id="hero" class="hero section dark-background">
+
+  <img src="assets/img/hero-bg.jpg" alt="Event Management Background" data-aos="fade-in">
+
+  <div class="container d-flex flex-column align-items-center">
+    <h2 data-aos="fade-up" data-aos-delay="100">DESIGN. ORGANIZE. CELEBRATE.</h2>
+    <p data-aos="fade-up" data-aos-delay="200">We bring your events to life with seamless planning and execution.</p>
+    <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
+      <a href="#services" class="btn-get-started">Plan Your Event</a>
+      <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center">
+        <i class="bi bi-play-circle"></i><span>Watch Highlights</span>
+      </a>
+    </div>
+  </div>
+
+</section><!-- /Hero Section -->
+
+
+
+
+
+
+
+<section id="dashboard-stats" class="container my-5">
+    <div class="row text-center">
+  
+      <!-- Students Count Card -->
+      <div class="col-md-4">
+        <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+          <div class="card-body">
+            <h5 class="card-title">Students</h5>
+            <button class="btn btn-success" onclick="viewStudents()" id="viewEvents">View</button>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Events Count Card -->
+      <div class="col-md-4">
+        <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+          <div class="card-body">
+            <h5 class="card-title">Events</h5>
+            <button class="btn btn-success" onclick="viewEvents()">View</button>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Registrations Count Card -->
+      <div class="col-md-4">
+        <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+          <div class="card-body">
+            <h5 class="card-title">Registrations</h5>
+            <button class="btn btn-success" onclick="viewRegistrations()">View</button>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </section>
+
+
+
+  <!-- view events starting............................................................................................................ -->
+
+  <section id="eventsSection" class="container my-5" style="display:none;">
+    <h2 class="text-center">Event List</h2>
+    <button id="add" class="btn btn-primary" onclick="add()">Add</button>
+    <div id="eventsTableContainer" class="table-responsive"></div>
+</section>
+
+  <!-- view events ending............................................................................................................ -->
+
+
+
+
+<div class="container mt-5" id="add_event" style="display: none;">
+  <h2 class="text-center">Add New Event</h2>
+  <form id="eventForm">
+      <div class="mb-3">
+          <label for="eventName" class="form-label">Event Name</label>
+          <input type="text" class="form-control" id="eventName" required>
+      </div>
+      <div class="mb-3">
+        <label for="imageFile" class="form-label">Upload Image</label>
+        <input type="file" class="form-control" id="imageFile" accept=".jpg,.jpeg,.png" required>
+        <small class="text-muted">Max file size: 2MB (JPG, JPEG, PNG only)</small>
+    </div>
+      <div class="mb-3">
+          <label for="startDate" class="form-label">Start Date</label>
+          <input type="date" class="form-control" id="startDate" required>
+      </div>
+      <div class="mb-3">
+          <label for="endDate" class="form-label">End Date</label>
+          <input type="date" class="form-control" id="endDate" required>
+      </div>
+      <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea class="form-control" id="description" rows="3" required></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Apply Link</label>
+        <input type="text" class="form-control" id="applyLink" required>    </div>
+      <button type="button" class="btn btn-primary" onclick="eventAdd()">Submit</button>
+  </form>
+  <div id="message" class="mt-3"></div>
+</div>
+
+
+
+
+
+
+
+<!-- update event -->
+<div class="container mt-5" style="display: none;" id="edit_event">
+  <h2 class="text-center">Edit Event</h2>
+  <form id="eventForm">
+
+    <div class="mb-3">
+      <label for="eventName" class="form-label">Event Id</label>
+      <input type="text" class="form-control" id="eventId" readonly>
+  </div>
+
+  <div class="mb-3">
+    <label for="imageFile" class="form-label">Upload Image</label>
+    <input type="file" class="form-control" id="imageFiles" accept=".jpg,.jpeg,.png" required>
+    <small class="text-muted">Max file size: 2MB (JPG, JPEG, PNG only)</small>
+</div>
+      <div class="mb-3">
+          <label for="eventName" class="form-label">Event Name</label>
+          <input type="text" class="form-control" id="eventNames" required>
+      </div>
+    
+      <div class="mb-3">
+          <label for="startDate" class="form-label">Start Date</label>
+          <input type="date" class="form-control" id="startDates" required>
+      </div>
+      <div class="mb-3">
+          <label for="endDate" class="form-label">End Date</label>
+          <input type="date" class="form-control" id="endDates" required>
+      </div>
+      <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea class="form-control" id="descriptions" rows="3" required></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Apply Link</label>
+        <input type="text" class="form-control" id="applyLinks" required>    
+      </div>
+      <button type="button" class="btn btn-primary" onclick="submitUpdateEvent()">Update Event</button>
+  </form>
+  <div id="message" class="mt-3"></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<footer id="footer" class="footer dark-background">
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename">EMS</span>
+          </a>
+          <p>A108 Adam Street, New York, NY 535022</p>
+          <p><strong>Phone:</strong> +1 5589 55488 55</p>
+          <p><strong>Email:</strong> info@example.com</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+  
+  <!-- Vendor JS Files -->
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/php-email-form/validate.js"></script>
+  <script src="../assets/vendor/aos/aos.js"></script>
+  <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+  
+  </body>
+  
+  </html>
+  
